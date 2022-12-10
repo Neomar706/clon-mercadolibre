@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { Navbar } from './components/organisms/Navbar'
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <div className="App">
-      
-    </div>
-  )
+	return (
+		<div className='App'>
+			<div className='w-full h-screen bg-[#ebebeb]'>
+				<Navbar />
+			</div>
+		</div>
+	)
 }
 
 export default App
