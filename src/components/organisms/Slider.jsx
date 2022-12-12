@@ -18,7 +18,14 @@ export const Slider = function(){
 
     return (
         <div className='relative flex'>
+            <div 
+                className="absolute opacity-70 hover:opacity-100 z-10 top-32 flex items-center content-center w-10 h-16 bg-white cursor-pointer rounded-tr-full rounded-br-full" 
+                ref={navigationPrevRef}
+            >
+                <BsChevronLeft className='ml-2' color='#000' />
+            </div>
             <Swiper
+                style={{userSelect: 'none'}}
                 modules={[Navigation, Pagination]}
                 loop={true}
                 slidesPerView={1}
@@ -36,20 +43,12 @@ export const Slider = function(){
                 <SwiperSlide> <img src={navidadBanner} /> </SwiperSlide>
                 <SwiperSlide> <img src={yukeryBanner} /> </SwiperSlide>
                 <SwiperSlide> <img src={futbolBanner} /> </SwiperSlide>
-            </Swiper>
-            <div className='z-10 absolute flex w-screen h-full items-center'>
-                <div 
-                    className="flex items-center content-center w-10 h-16 bg-white cursor-pointer rounded-tr-full rounded-br-full" 
-                    ref={navigationPrevRef}
-                >
-                    <BsChevronLeft className='ml-2' color='#000' />
-                </div>
-                <div 
-                    className="flex items-center content-center w-10 h-16 bg-white ml-auto cursor-pointer rounded-tl-full rounded-bl-full" 
-                    ref={navigationNextRef}
-                >
-                    <BsChevronRight className='ml-4' color='#000' />
-                </div>
+            </Swiper>                
+            <div 
+                className="absolute opacity-70 hover:opacity-100 z-10 top-32 right-0 flex items-center content-center w-10 h-16 bg-white *ml-auto cursor-pointer rounded-tl-full rounded-bl-full" 
+                ref={navigationNextRef}
+            >
+                <BsChevronRight className='ml-4' color='#000' />
             </div>
         </div>
     )

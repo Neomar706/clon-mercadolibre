@@ -5,7 +5,7 @@ function App() {
 	
 	return (
 		<div className='App'>
-			<div className='w-full h-screen bg-[#ebebeb]'>
+			<div className='w-full h-[50rem] bg-[#ebebeb]'>
 				<Navbar />
 				<Slider />
 			</div>
