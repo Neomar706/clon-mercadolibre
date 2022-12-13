@@ -7,7 +7,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        quicksand: ['Quicksand', 'sans-serif']
+        quicksand: ['Quicksand', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif']
+      },
+      spacing: {
+        '88': '22rem'
       }
     },
   },
