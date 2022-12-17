@@ -4,14 +4,14 @@ import { HiChevronDown } from 'react-icons/hi'
 import { CiUser } from 'react-icons/ci'
 import { BsBell } from 'react-icons/bs'
 import imgEnviosExpress from '../../assets/img-envios-express.jpg'
-
+import { Link } from 'react-router-dom'
 
 export const Navbar = function(){
     return (
     <div className='w-full bg-[#fff159]'>
         <div className='h-14 flex items-center'>
             <div className='w-9/12 h-full m-auto flex items-center'>
-                <a href='/'> <Brand /> </a>
+                <Link to='/'> <Brand /> </Link>
                 <Search />
                 <img className='w-[22rem] h-auto' src={imgEnviosExpress} alt='Envios Express' draggable={false} />
             </div>
