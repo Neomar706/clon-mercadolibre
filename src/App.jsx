@@ -2,6 +2,34 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/organisms/Navbar'
 import { Home } from './components/pages/Home'
 
+
+
+import { useSelector, useDispatch } from 'react-redux'
+import { counterSelector, _addOne, _subtractOne, _counterSlice } from './redux/slices/counter'
+
+
+const TestComponent = function({  }){
+	const dispatch = useDispatch()
+	const { count } = useSelector(counterSelector)
+	
+
+	const handleClickAdd = () => dispatch(_addOne())
+
+	const handleClickSubtract = () => dispatch(_subtractOne())
+
+	return (
+		<>
+			<div>{count}</div>
+			<div>
+				<button className='w-20 h-20 bg-red-200 m-5' onClick={() => handleClickSubtract()}>-</button>
+				<button className='w-20 h-20 bg-red-200 m-5' onClick={() => handleClickAdd()}>+</button>
+			</div>
+		</>
+	)
+}
+
+
+
 export const App = function(){
 	return (
 		<BrowserRouter>
@@ -9,6 +37,7 @@ export const App = function(){
 				<Navbar />
 				<Routes>
 					<Route path='/' element={<Home />} />
+					<Route path='/test' element={<TestComponent />} />
 				</Routes>
 			</div>
 		</BrowserRouter>
