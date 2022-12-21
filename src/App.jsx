@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/organisms/Navbar'
 import { Home } from './components/pages/Home'
-
+import { SearchPage } from './components/pages/SearchPage'
 
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -37,6 +37,7 @@ export const App = function(){
 				<Navbar />
 				<Routes>
 					<Route path='/' element={<Home />} />
+					<Route path='/search/:search' element={<SearchPage />} />
 					<Route path='/test' element={<TestComponent />} />
 				</Routes>
 			</div>

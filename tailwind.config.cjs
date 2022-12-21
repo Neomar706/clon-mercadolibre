@@ -11,7 +11,9 @@ module.exports = {
         roboto: ['Roboto', 'sans-serif']
       },
       spacing: {
-        '88': '22rem'
+        '68': '17rem',
+        '88': '22rem',
+        '104': '26rem'
       }
     },
   },

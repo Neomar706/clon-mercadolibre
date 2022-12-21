@@ -1,8 +1,6 @@
-import { Navbar } from '../organisms/Navbar'
-import { Slider } from '../organisms/Slider'
+import { BannerSlider } from '../organisms/BannerSlider'
 import { ProductsSlider } from '../organisms/ProductsSlider'
 import { Card2 } from '../organisms/Card2'
-
 
 import electrodomesticos from '../../assets/electrodomesticos.webp'
 import tvYAudio from '../../assets/tv-y-audio.webp'
@@ -22,7 +20,7 @@ import oficina from '../../assets/equipamiento-y-oficina.webp'
 export const Home = function({  }){
     return (
         <>
-            <Slider />
+            <BannerSlider />
             <div className='w-9/12 m-auto my-5'>
                 <ProductsSlider title='Basado en tu última búsqueda.' />
                 <ProductsSlider title='De tu historial.' />
