@@ -7,7 +7,7 @@ export const ShipmentCard = function({  }){
         <div className='flex items-center content-between px-3 py-4 rounded-md w-full bg-white' style={{userSelect: 'none'}}>
             <span className='text-sm font-quicksand font-semibold'>Envío gratis</span>
             <div className='ml-auto'>
-                <ShipmentSwitch />
+                <ShipmentSwitch onSwitch={(isSwitched) => console.log(isSwitched)} />
             </div>
         </div>
     )

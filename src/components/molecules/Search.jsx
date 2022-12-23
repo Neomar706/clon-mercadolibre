@@ -14,6 +14,7 @@ export const Search = function(){
 
     const handleSubmit = function(e){
         e.preventDefault()
+        if(value.length < 3) return
         navigate(`search/${value.replaceAll(' ', '+')}`)
         setValue('')
     }

@@ -6,6 +6,8 @@ import { BsBell } from 'react-icons/bs'
 import imgEnviosExpress from '../../assets/img-envios-express.jpg'
 import { Link } from 'react-router-dom'
 
+const isLoged = false
+
 export const Navbar = function(){
     return (
     <div className='w-full bg-[#fff159]'>
@@ -32,16 +34,28 @@ export const Navbar = function(){
                     <li className='ml-9 text-sm text-gray-600'> <a href="#">Ayuda</a> </li>
                 </ul>
                 <ul className='flex items-center'>
-                    <li className='ml-4'>
-                        <a href='#' className='flex items-center text-sm'>
-                            <CiUser size={20} fontWeight={200} />
-                            UsuarioName
-                            <HiChevronDown size={14} color='gray' className='mt-1' />
-                        </a>
-                    </li>
-                    <li className='ml-4'> <a href='#' className='text-sm'>Mis compras</a> </li>
-                    <li className='ml-4'> <a href="#" className='text-sm'>Favoritos</a> </li>
-                    <li className='ml-4'> <a href="#" className='text-sm'><BsBell /></a> </li>
+                    {
+                        isLoged ? (
+                            <>
+                                <li className='ml-4'>
+                                    <a href='#' className='flex items-center text-sm'>
+                                        <CiUser size={20} fontWeight={200} />
+                                        UsuarioName
+                                        <HiChevronDown size={14} color='gray' className='mt-1' />
+                                    </a>
+                                </li>
+                                <li className='ml-4'> <a href='#' className='text-sm'>Mis compras</a> </li>
+                                <li className='ml-4'> <a href="#" className='text-sm'>Favoritos</a> </li>
+                                <li className='ml-4'> <a href="#" className='text-sm'><BsBell /></a> </li>
+                            </>
+                        ) : (
+                            <>
+                                <li className='ml-4'> <a href='#' className='text-sm'>Crea tu cuenta</a> </li>
+                                <li className='ml-4'> <a href='#' className='text-sm'>Ingresa</a> </li>
+                                <li className='ml-4'> <a href='#' className='text-sm'>Mis compras</a> </li>
+                            </>
+                        )
+                    }
                 </ul>
             </nav>
         </div>

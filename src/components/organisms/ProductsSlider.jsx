@@ -2,14 +2,14 @@ import { useState } from 'react'
 
 import { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 
 import { useSwiper } from "../../hooks/useSwiper"
 import { Card1 } from "./Card1"
+import { ChevronButton } from '../atoms/ChevronButton'
 import imgMultimetro from '../../assets/img-multimetro.webp'
 
 
-export const ProductsSlider = function({ title }){
+export const ProductsSlider = function({ title, itemsPerView, withTitle = true, cards }){
     const [prevElement, navigationPrevRef] = useSwiper()
 	const [nextElement, navigationNextRef] = useSwiper()
 
@@ -22,47 +22,21 @@ export const ProductsSlider = function({ title }){
         setIsEnd(e.isEnd)
     }
 
-    const cards = [
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35.24} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35.24} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-    ]
-
 
     return (
         <div>
-            <h2 className='text-2xl font-quicksand font-light'>{title}</h2>
-            <div className='flex mb-5 relative' onMouseOver={() => setShowArrows(true)} onMouseLeave={() => setShowArrows(false)}>
-                <button ref={navigationPrevRef} className={`cursor-pointer flex items-center justify-center w-16 h-16 absolute z-10 top-36 -left-8 bg-white rounded-full shadow-lg ${!showArrows ? 'opacity-0' : 'opacity-100'} ${isBeginnig ? 'hidden' : ''}`}>
-                    <BsChevronLeft className='*ml-2' size={20} color='#000' />
-                </button>
-                <button ref={navigationNextRef} className={`cursor-pointer flex items-center justify-center w-16 h-16 absolute z-10 top-36 -right-8 bg-white rounded-full shadow-lg ${!showArrows ? 'opacity-0' : 'opacity-100'} ${isEnd ? 'hidden' : ''}`}>
-                    <BsChevronRight className='*ml-2' size={20} color='#000' />
-                </button>
+            { withTitle && <h2 className='text-2xl font-quicksand font-light'>{title}</h2> }
+            <div className='flex relative' onMouseOver={() => setShowArrows(true)} onMouseLeave={() => setShowArrows(false)}>
+                <ChevronButton ref={navigationPrevRef} direction='left' active={isBeginnig} show={showArrows} />
+                <ChevronButton ref={navigationNextRef} direction='right' active={isEnd} show={showArrows} />
                 <Swiper
                     style={{userSelect: 'none'}}
-                    slidesPerView={5}
+                    slidesPerView={itemsPerView}
                     spaceBetween={18}
                     onSlideChange={verifyPosition}
                     modules={[Navigation]}
                     slidesPerGroup={5}
+                    allowTouchMove={false}
                     navigation={{
                         prevEl: prevElement,
                         nextEl: nextElement,

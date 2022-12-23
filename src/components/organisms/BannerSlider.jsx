@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import navidadBanner from '../../assets/navidad-banner.webp'
 import yukeryBanner from '../../assets/yukery-banner.webp'
 import futbolBanner from '../../assets/futbol-banner.webp'
-import { BsChevronRight, BsChevronLeft } from 'react-icons/bs'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useSwiper } from '../../hooks/useSwiper'
 
 import 'swiper/css'
@@ -24,7 +24,13 @@ export const BannerSlider = function(){
                 className={`absolute z-10 top-32 flex items-center content-center w-10 h-16 bg-white cursor-pointer rounded-tr-full rounded-br-full ${showArrows ? 'opacity-100': 'opacity-0'}`} 
                 ref={navigationPrevRef}
             >
-                <BsChevronLeft className='ml-2' color='#3483fa' fontWeight='bold' />
+                <FaChevronLeft className='ml-2' color='#3483fa' fontWeight='bold' />
+            </div>
+            <div 
+                className={`absolute z-10 top-32 right-0 flex items-center content-center w-10 h-16 bg-white *ml-auto cursor-pointer rounded-tl-full rounded-bl-full ${showArrows ? 'opacity-100': 'opacity-0'}`}
+                ref={navigationNextRef}
+            >
+                <FaChevronRight className='ml-4' color='#3483fa' fontWeight='bold' />
             </div>
             <Swiper
                 style={{userSelect: 'none'}}
@@ -36,6 +42,7 @@ export const BannerSlider = function(){
                     prevEl: prevElement,
                     nextEl: nextElement
                 }}
+                allowTouchMove={false}
                 pagination={{ clickable: true }}
                 autoplay={{
                     delay: 5000,
@@ -44,13 +51,7 @@ export const BannerSlider = function(){
                 <SwiperSlide> <img src={navidadBanner} /> </SwiperSlide>
                 <SwiperSlide> <img src={yukeryBanner} /> </SwiperSlide>
                 <SwiperSlide> <img src={futbolBanner} /> </SwiperSlide>
-            </Swiper>                
-            <div 
-                className={`absolute z-10 top-32 right-0 flex items-center content-center w-10 h-16 bg-white *ml-auto cursor-pointer rounded-tl-full rounded-bl-full ${showArrows ? 'opacity-100': 'opacity-0'}`}
-                ref={navigationNextRef}
-            >
-                <BsChevronRight className='ml-4' color='#3483fa' fontWeight='bold' />
-            </div>
+            </Swiper>  
         </div>
     )
 }

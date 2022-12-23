@@ -24,6 +24,14 @@ export const MinMax = function({  }){
 
     const handleSubmit = function(e){
         e.preventDefault()
+        if(range.min.length === 0 && range.max.length === 0) return
+        if(Number(range.min) < 0 || Number(range.max) < 0){
+            setRange({
+                min: '',
+                max: ''
+            })
+            return
+        }
         console.log(range.min)
         console.log(range.max)
     }
