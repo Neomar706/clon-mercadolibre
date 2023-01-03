@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import navidadBanner from '../../assets/navidad-banner.webp'
@@ -18,6 +18,8 @@ export const BannerSlider = function(){
 
     const [showArrows, setShowArrows] = useState(false)
 
+    const swiperRef = useRef()
+
     return (
         <div className='relative flex' onMouseOver={() => setShowArrows(true)} onMouseLeave={() => setShowArrows(false)}>
             <div 
@@ -33,20 +35,21 @@ export const BannerSlider = function(){
                 <FaChevronRight className='ml-4' color='#3483fa' fontWeight='bold' />
             </div>
             <Swiper
+                ref={swiperRef}
                 style={{userSelect: 'none'}}
                 modules={[Navigation, Pagination]}
                 loop={true}
-                draggable={false}
                 slidesPerView={1}
+                autoplay={{ 
+                    delay: 5000,
+                    disableOnInteraction: false
+                }}
                 navigation={{
                     prevEl: prevElement,
                     nextEl: nextElement
                 }}
                 allowTouchMove={false}
                 pagination={{ clickable: true }}
-                autoplay={{
-                    delay: 5000,
-                }}
             >
                 <SwiperSlide> <img src={navidadBanner} /> </SwiperSlide>
                 <SwiperSlide> <img src={yukeryBanner} /> </SwiperSlide>

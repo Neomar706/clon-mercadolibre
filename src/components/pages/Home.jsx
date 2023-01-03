@@ -84,7 +84,7 @@ export const Home = function({  }){
                     <Card2 linkTo='#' className='ml-3' title='alimentos' image={hogarYMuebles} />
                     <Card2 linkTo='#' className='ml-3' title='alimentos' image={oficina} />
                 </div>
-                <ProductsSlider cards={cards} title='Esto también te puede interesar.' />
+                <ProductsSlider cards={cards} title='Esto también te puede interesar.' itemsPerView={5} />
             </div>
         </>
     )

@@ -17,8 +17,10 @@ import { QuestionAnswer } from '../atoms/QuestionAnswer'
 import imgMultimetro from '../../assets/img-multimetro.webp'
 
 
+import nl2br from 'react-nl2br'
 export const Article = function({  }){ 
-	
+	const text = `****************************************************\nPOR FAVOR LEA LAS CONDICIONES DE VENTA\n****************************************************\n- NO hacemos entregas personales en BARQUISIMETO. \n\n- EL PRODUCTO SOLO PODRÁ SER ENVIADO EL MISMO DÍA SI REALIZA Y CONFIRMA EL PAGO (Y ENVIA LOS DATOS DE ENVIO) ANTES DE LAS 09:00AM.\n\n****************************************************\nCaracterística \n****************************************************\nVoltaje de alimentación: 4,75VDC - 5,25VDC\n\n****************************************************\nUBICACIÓN\n****************************************************\nSomos tienda virtual en la ciudad de Carora, Estado Lara.\n\n****************************************************\nHORARIO DE TRABAJO\n****************************************************\nLaboramos todos los dias de 7:00AM a 12:00PM y de 1:00PM a 9:00PM\n\n****************************************************\nMÉTODOS DE PAGO\n****************************************************\n* Transferencias y/o pago movil\n- Banesco (Pago móvil y transferencia)\n- Banco de Venezuela (Transferencia) \n- Provincial (Transferencia)\n* Divisas \n- Efectivo \n- Binance USDT \n\n****************************************************\nMÉTODOS DE DESPACHO\n****************************************************\n* \n* Envíos a Nivel Nacional\n- MRW \n- TEALCA (Cobro a destino)\n\nCONSULTE DISPONIBILIDAD DEL PRODUCTO ANTES DE OFERTAR. No ofertar si no está seguro de concretar la compra. De no concretarla será CALIFICADO NEGATIVO. Realice todas sus preguntas y amablemente se las responderemos.\n`
+
 	const params = useParams()
 	console.log(params)
 
@@ -85,48 +87,7 @@ export const Article = function({  }){
 						<div className="">
 							<h3 className='text-2xl text-gray-700 font-roboto tracking-wide mb-5'>Descripción</h3>
 							<p className='text-lg text-gray-500 font-roboto tracking-wide'>
-								****************************************************<br />
-								POR FAVOR LEA LAS CONDICIONES DE VENTA<br />
-								****************************************************<br />
-								- NO hacemos entregas personales en BARQUISIMETO. <br />
-								<br />
-								- EL PRODUCTO SOLO PODRÁ SER ENVIADO EL MISMO DÍA SI REALIZA Y CONFIRMA EL PAGO (Y ENVIA LOS DATOS DE ENVIO) ANTES DE LAS 09:00AM.<br />
-								<br />
-								****************************************************<br />
-								Característica <br />
-								****************************************************<br />
-								Voltaje de alimentación: 4,75VDC - 5,25VDC<br />
-								<br />
-								****************************************************<br />
-								UBICACIÓN<br />
-								****************************************************<br />
-								Somos tienda virtual en la ciudad de Carora, Estado Lara.<br />
-								<br />
-								****************************************************<br />
-								HORARIO DE TRABAJO<br />
-								****************************************************<br />
-								Laboramos todos los dias de 7:00AM a 12:00PM y de 1:00PM a 9:00PM<br />
-								<br />
-								****************************************************<br />
-								MÉTODOS DE PAGO<br />
-								****************************************************<br />
-								* Transferencias y/o pago movil<br />
-								- Banesco (Pago móvil y transferencia)<br />
-								- Banco de Venezuela (Transferencia) <br />
-								- Provincial (Transferencia)<br />
-								* Divisas <br />
-								- Efectivo <br />
-								- Binance USDT <br />
-								<br />
-								****************************************************<br />
-								MÉTODOS DE DESPACHO<br />
-								****************************************************<br />
-								* <br />
-								* Envíos a Nivel Nacional<br />
-								- MRW <br />
-								- TEALCA (Cobro a destino)<br />
-								<br />
-								CONSULTE DISPONIBILIDAD DEL PRODUCTO ANTES DE OFERTAR. No ofertar si no está seguro de concretar la compra. De no concretarla será CALIFICADO NEGATIVO. Realice todas sus preguntas y amablemente se las responderemos.<br />
+								{ nl2br(text) }
 							</p>
 						</div>
 					</div>

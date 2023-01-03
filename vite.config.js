@@ -7,7 +7,8 @@ export default defineConfig({
   define: {
     'process.env': {
       NODE_ENV: 'development',
-      HOST: 'localhost:5173'
+      HOST: 'localhost:5173',
+      BACKEND_HOST: 'http://localhost:5000'
     }
   }
 })
