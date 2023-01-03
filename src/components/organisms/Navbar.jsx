@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { CiUser } from 'react-icons/ci'
 import { BsBell } from 'react-icons/bs'
@@ -10,6 +11,7 @@ import { Search } from '../molecules/Search'
 import imgEnviosExpress from '../../assets/img-envios-express.jpg'
 
 import { userSelector } from '../../redux/slices/userSlice'
+
 import { DropdownList1 } from '../atoms/DropdownList1'
 import { DropdownList2 } from '../atoms/DropdownList2'
 
@@ -43,7 +45,7 @@ export const Navbar = function(){
                             Categorías 
                             <HiChevronDown size={14} color='gray' />
                         </span>
-                        {<DropdownList1 ref={_dropRef} /> }
+                        { <DropdownList1 ref={_dropRef} /> }
                     </li>
                     <li className='ml-28 text-sm text-gray-600 hover:text-gray-800'>
                         <Link to={isLogged ? '/account/history' : '/login?redirect=history'}>Historial</Link>

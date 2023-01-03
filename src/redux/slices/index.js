@@ -1,7 +1,9 @@
-import { combineReducers } from "@reduxjs/toolkit";
+import { combineReducers } from '@reduxjs/toolkit'
 
-import { userReduder } from "./userSlice";
+import { categoryReducer } from './categorySlice'
+import { userReduder } from './userSlice'
 
 export const rootReducer = combineReducers({
-    user: userReduder
+    user: userReduder,
+    category: categoryReducer
 })

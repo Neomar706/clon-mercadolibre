@@ -1,23 +1,24 @@
+
 import { BsChevronDown } from 'react-icons/bs'
-import { useParams } from 'react-router-dom'
 
 import { Card3 } from '../organisms/Card3'
 
-import compuerta from '../../assets/compuerta.webp'
-import compuertaDiagrama from '../../assets/compuerta-diagrama.jpg'
 import { ShipmentCard } from '../molecules/ShipmentCard'
 import { List } from '../atoms/List'
-import { Input2 } from '../atoms/Input2'
 import { MinMax } from '../molecules/MinMax'
 
+import compuerta from '../../assets/compuerta.webp'
+import compuertaDiagrama from '../../assets/compuerta-diagrama.jpg'
+
+import { useQuery } from '../../hooks/useQuery'
 
 export const SearchPage = function({  }){
-    const { search } = useParams()
-    console.log(search);
+    const query = useQuery()
+    console.log(query)
     
     const capitalize = function(text){
-        const txt = text[0].toUpperCase() + text.slice(1)
-        return txt.replaceAll('+', ' ')
+        const txt = decodeURIComponent(text)
+        return txt[0].toUpperCase() + txt.slice(1)
     }
 
     const images = [
@@ -125,7 +126,7 @@ export const SearchPage = function({  }){
     return (
         <div className='w-9/12 mx-auto'>
             <div className="flex mt-8 mb-5">
-                <div className='text-sm text-gray-600 font-quicksand font-medium'>Electrónica, Audio y Video</div>
+                <div className='text-sm text-gray-600 font-quicksand font-medium'>{ query?.keywork && 'Electrónica, Audio y Video' }</div>
                 <div className='ml-auto text-sm text-gray-900 font-roboto font-medium flex'>
                     Ordenar por
                     <span className='hover:text-blue-500 cursor-pointer flex ml-2'>Más relevantes <BsChevronDown className='mt-[2px] ml-1' size={16}  /></span>
@@ -134,7 +135,7 @@ export const SearchPage = function({  }){
             <div className='flex'>
                 <div className='w-1/4 pr-10'>
                     <div className='text-2xl text-gray-800 font-semibold flex flex-col'>
-                        <p>{capitalize(search)}</p>
+                        <p>{query?.keywork ? capitalize(query?.keywork) : capitalize(query?.category_name)}</p>
                         <span className='text-sm text-gray-600'>53 resultados</span>
 
                         <div className='mt-8'>
@@ -160,7 +161,6 @@ export const SearchPage = function({  }){
                         <div className="mt-8">
                             <List title='Precio' list={precios} />
                             <MinMax />
-                            {/* <Input2 placeholder='Mínimo' /> */}
                         </div>
 
                     </div>
