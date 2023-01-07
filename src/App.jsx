@@ -35,7 +35,7 @@ export const App = function(){
 					<Route path='/login' element={<Login />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/search' element={<SearchPage />} />
-					<Route path='/article/:articleName' element={<Article />} />
+					<Route path='/article' element={<Article />} />
 					<Route path='/password/forgot' element={<ForgotPassword />} />
 					<Route path='/password/reset' element={<ResetPassword />} />
 					<Route element={<ProtectedRoute isLogged={isLogged} />}>

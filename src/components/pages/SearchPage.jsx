@@ -126,7 +126,7 @@ export const SearchPage = function({  }){
     return (
         <div className='w-9/12 mx-auto'>
             <div className="flex mt-8 mb-5">
-                <div className='text-sm text-gray-600 font-quicksand font-medium'>{ query?.keywork && 'Electrónica, Audio y Video' }</div>
+                <div className='text-sm text-gray-600 font-quicksand font-medium'>{ query?.keyword && 'Electrónica, Audio y Video' }</div>
                 <div className='ml-auto text-sm text-gray-900 font-roboto font-medium flex'>
                     Ordenar por
                     <span className='hover:text-blue-500 cursor-pointer flex ml-2'>Más relevantes <BsChevronDown className='mt-[2px] ml-1' size={16}  /></span>
@@ -135,7 +135,7 @@ export const SearchPage = function({  }){
             <div className='flex'>
                 <div className='w-1/4 pr-10'>
                     <div className='text-2xl text-gray-800 font-semibold flex flex-col'>
-                        <p>{query?.keywork ? capitalize(query?.keywork) : capitalize(query?.category_name)}</p>
+                        <p>{query?.keyword ? capitalize(query?.keyword) : capitalize(query?.category_name)}</p>
                         <span className='text-sm text-gray-600'>53 resultados</span>
 
                         <div className='mt-8'>
@@ -166,12 +166,12 @@ export const SearchPage = function({  }){
                     </div>
                 </div>
                 <div className='w-3/4 h-104 grid grid-cols-3 gap-4 grid-rows-auto'>
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article/74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article/74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article/74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article/74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article/74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article/74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' />
+                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
+                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
+                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
+                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
+                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
+                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
                 </div>
             </div>
         </div>

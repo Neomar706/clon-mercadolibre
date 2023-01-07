@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Navigation, Pagination } from 'swiper'
+import { Navigation, Pagination, Autoplay } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import navidadBanner from '../../assets/navidad-banner.webp'
 import yukeryBanner from '../../assets/yukery-banner.webp'
@@ -17,7 +17,6 @@ export const BannerSlider = function(){
     const [nextElement, navigationNextRef] = useSwiper()
 
     const [showArrows, setShowArrows] = useState(false)
-
     const swiperRef = useRef()
 
     return (
@@ -37,7 +36,7 @@ export const BannerSlider = function(){
             <Swiper
                 ref={swiperRef}
                 style={{userSelect: 'none'}}
-                modules={[Navigation, Pagination]}
+                modules={[Autoplay, Navigation, Pagination]}
                 loop={true}
                 slidesPerView={1}
                 autoplay={{ 

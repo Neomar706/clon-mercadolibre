@@ -9,7 +9,7 @@ import { ChevronButton } from '../atoms/ChevronButton'
 import imgMultimetro from '../../assets/img-multimetro.webp'
 
 
-export const ProductsSlider = function({ title, itemsPerView, withTitle = true, cards }){
+export const ProductsSlider = function({ title, itemsPerView, withTitle = true, hasNavigation, cards }){
     const [prevElement, navigationPrevRef] = useSwiper()
 	const [nextElement, navigationNextRef] = useSwiper()
 
@@ -27,8 +27,14 @@ export const ProductsSlider = function({ title, itemsPerView, withTitle = true, 
         <div>
             { withTitle && <h2 className='text-2xl font-quicksand font-light'>{title}</h2> }
             <div className='flex relative' onMouseOver={() => setShowArrows(true)} onMouseLeave={() => setShowArrows(false)}>
-                <ChevronButton ref={navigationPrevRef} direction='left' active={isBeginnig} show={showArrows} />
-                <ChevronButton ref={navigationNextRef} direction='right' active={isEnd} show={showArrows} />
+                {
+                    hasNavigation && (
+                        <>
+                            <ChevronButton ref={navigationPrevRef} direction='left' active={isBeginnig} show={showArrows} />
+                            <ChevronButton ref={navigationNextRef} direction='right' active={isEnd} show={showArrows} />
+                        </>
+                    )
+                }
                 <Swiper
                     style={{userSelect: 'none'}}
                     slidesPerView={itemsPerView}

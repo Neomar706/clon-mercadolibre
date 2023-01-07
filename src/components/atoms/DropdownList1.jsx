@@ -8,14 +8,14 @@ import { categorySelector, getCategories } from '../../redux/slices/categorySlic
 export const DropdownList1 = forwardRef(({  }, ref) => {
 
     const dispatch = useDispatch()
-    const { loading, results } = useSelector(categorySelector)
+    const { loading, results, success } = useSelector(categorySelector)
 
 
     useEffect(() => {
         dispatch(getCategories())
     }, [])
 
-    return !loading ? (
+    return !loading && success ? (
         <div ref={ref} className='absolute top-8 left-0 z-10 min-w-max hover:block hidden shadow-md'>
             <div className='w-full h-full bg-[#333] relative py-6 rounded-md'>
                 <div className='bg-[#333] w-5 h-5 absolute -top-1 left-16 rotate-45' />

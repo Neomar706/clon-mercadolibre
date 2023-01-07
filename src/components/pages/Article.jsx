@@ -1,6 +1,9 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import nl2br from 'react-nl2br'
 
 import { Divider } from '../atoms/Divider'
+import { FeaturesCard } from '../atoms/FeaturesCard'
+import { QuestionAnswer } from '../atoms/QuestionAnswer'
 
 import { Zoom } from '../organisms/Zoom'
 import { Card1 } from '../organisms/Card1'
@@ -8,22 +11,19 @@ import { Card4 } from '../organisms/Card4'
 import { Card5 } from '../organisms/Card5'
 import { ProductsSlider } from '../organisms/ProductsSlider'
 
+import { AskForm } from '../molecules/AskForm'
+
+import { useQuery } from '../../hooks/useQuery'
+
 import compuerta from '../../assets/compuerta.webp'
 import compuertaDiagrama from '../../assets/compuerta-diagrama.jpg'
-import { FeaturesCard } from '../atoms/FeaturesCard'
-import { AskForm } from '../molecules/AskForm'
-import { QuestionAnswer } from '../atoms/QuestionAnswer'
-
 import imgMultimetro from '../../assets/img-multimetro.webp'
 
 
-import nl2br from 'react-nl2br'
 export const Article = function({  }){ 
+	const query = useQuery()
+
 	const text = `****************************************************\nPOR FAVOR LEA LAS CONDICIONES DE VENTA\n****************************************************\n- NO hacemos entregas personales en BARQUISIMETO. \n\n- EL PRODUCTO SOLO PODRÁ SER ENVIADO EL MISMO DÍA SI REALIZA Y CONFIRMA EL PAGO (Y ENVIA LOS DATOS DE ENVIO) ANTES DE LAS 09:00AM.\n\n****************************************************\nCaracterística \n****************************************************\nVoltaje de alimentación: 4,75VDC - 5,25VDC\n\n****************************************************\nUBICACIÓN\n****************************************************\nSomos tienda virtual en la ciudad de Carora, Estado Lara.\n\n****************************************************\nHORARIO DE TRABAJO\n****************************************************\nLaboramos todos los dias de 7:00AM a 12:00PM y de 1:00PM a 9:00PM\n\n****************************************************\nMÉTODOS DE PAGO\n****************************************************\n* Transferencias y/o pago movil\n- Banesco (Pago móvil y transferencia)\n- Banco de Venezuela (Transferencia) \n- Provincial (Transferencia)\n* Divisas \n- Efectivo \n- Binance USDT \n\n****************************************************\nMÉTODOS DE DESPACHO\n****************************************************\n* \n* Envíos a Nivel Nacional\n- MRW \n- TEALCA (Cobro a destino)\n\nCONSULTE DISPONIBILIDAD DEL PRODUCTO ANTES DE OFERTAR. No ofertar si no está seguro de concretar la compra. De no concretarla será CALIFICADO NEGATIVO. Realice todas sus preguntas y amablemente se las responderemos.\n`
-
-	const params = useParams()
-	console.log(params)
-
 	const images = [
 		{
 			id: 1, 
@@ -113,7 +113,7 @@ export const Article = function({  }){
 						sold={2}
 						isFavorite={true}
 						onFavorite={isFav => console.log(isFav)}
-						title={params.articleName.replaceAll('+', ' ')}
+						title={decodeURIComponent(query?.article_name)}
 						price={2.40}
 						isShipmentFree={true}
 						location='Mun. Libertador (centro), Distrito Capital'

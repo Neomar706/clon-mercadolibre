@@ -1,17 +1,22 @@
+import { useEffect } from 'react'
+
 import { BannerSlider } from '../organisms/BannerSlider'
 import { ProductsSlider } from '../organisms/ProductsSlider'
 import { Card2 } from '../organisms/Card2'
 import { Card1 } from '../organisms/Card1'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { getArticles, articleSelector } from '../../redux/slices/articlesSlice'
+
+
+// Images imports
 import electrodomesticos from '../../assets/electrodomesticos.webp'
 import tvYAudio from '../../assets/tv-y-audio.webp'
 import celulares from '../../assets/celulares.webp'
 import computacion from '../../assets/computacion.webp'
-
 import limpieza from '../../assets/limpieza.webp'
 import mascotas from '../../assets/mascotas.webp'
 import alimentos from '../../assets/alimentos.webp'
-
 import iluminacion from '../../assets/iluminacion.webp'
 import herramientas from '../../assets/herramientas.webp'
 import hogarYMuebles from '../../assets/hogar-y-muebles.webp'
@@ -20,53 +25,67 @@ import imgMultimetro from '../../assets/img-multimetro.webp'
 
 
 export const Home = function({  }){
+    const dispatch = useDispatch()
+    const { results, loading, success } = useSelector(articleSelector)
+    
 
     const cards = [
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35.24} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35.24} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
-        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35.24} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35.24} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
+        <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
     ]
 
+    useEffect(() => {
+        dispatch(getArticles(5))
+    }, [])
 
     return (
         <>
             <BannerSlider />
             <div className='w-9/12 mx-auto my-5'>
-                <div className="mb-5">
-                    <ProductsSlider cards={cards} title='Basado en tu última búsqueda.' itemsPerView={5} />
-                </div>
-                <div className="mb-5">
-                    <ProductsSlider cards={cards} title='De tu historial.' itemsPerView={5} />
-                </div>
-                <div className="mb-5">
-                    <ProductsSlider cards={cards} title='Basado en tus búsquedas de: Computación.' itemsPerView={5} />
-                </div>
-                <div className="mb-5">
-                    <ProductsSlider cards={cards} title='Basado en tus búsquedas de: Papelería.' itemsPerView={5} />
-                </div>
-                <div className="mb-5">
-                    <ProductsSlider cards={cards} title='Basado en tus búsquedas de: Alimentos.' itemsPerView={5} />
-                </div>
-                <div className="mb-5">
-                    <ProductsSlider cards={cards} title='Basado en tus búsquedas de: Moda.' itemsPerView={5} />
-                </div>
+                {
+                    loading 
+                    ? <h2>Cargando...</h2>
+                    : success && results.map((result, i) => (
+                        <div className="mb-5" key={i}>
+                            <ProductsSlider 
+                                title={result.category} 
+                                itemsPerView={result.articles.length <= 5 ? result.articles.length : 5} 
+                                hasNavigation={result.articles.length > 5}
+                                cards={
+                                    result.articles.map((article, i) => (
+                                        <Card1 
+                                            key={i}
+                                            linkTo={`/article?id=${article.id}&article_name=${article.title}`}
+                                            title={article.title}
+                                            image={article.images[0].url} 
+                                            isShipmentFree={article.shipment_free} 
+                                            isFavorite={false} 
+                                            onFavorite={isFav => console.log(isFav)} price={35} 
+                                        />
+                                    ))
+                                }
+                            />
+                        </div>
+                    ))
+                }
                 <div className='flex mb-10'>
                     <Card2 linkTo='#' title='electrodomésticos' image={electrodomesticos} />
                     <Card2 linkTo='#' className='ml-3' title='tv y audio' image={tvYAudio} />
@@ -84,7 +103,12 @@ export const Home = function({  }){
                     <Card2 linkTo='#' className='ml-3' title='alimentos' image={hogarYMuebles} />
                     <Card2 linkTo='#' className='ml-3' title='alimentos' image={oficina} />
                 </div>
-                <ProductsSlider cards={cards} title='Esto también te puede interesar.' itemsPerView={5} />
+                <ProductsSlider 
+                    cards={cards} 
+                    title='Esto también te puede interesar.' 
+                    itemsPerView={5} 
+                    hasNavigation={true}
+                />
             </div>
         </>
     )

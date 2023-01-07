@@ -15,7 +15,7 @@ export const getCategories = createAsyncThunk('category/getCategories', async (_
     return axios
         .get(`${process.env.BACKEND_HOST}/api/v1/category/all`)
         .then(res => fulfillWithValue(res.data))
-        .catch(err => rejectWithValue(err.data.response))
+        .catch(err => rejectWithValue(err.response.data))
 })
 
 

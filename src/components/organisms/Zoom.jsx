@@ -13,7 +13,7 @@ export const Zoom = function({ images }){
             <div className='w-full ml-4 mr-10'>
                 <div className="w-full h-auto">
                     <InnerImageZoom
-                        className='w-full h-auto'
+                        className='w-full h-[27rem] flex items-center'
                         // src={'https://laurenashpole.github.io/react-inner-image-zoom/images/unsplash-10-large.jpg'}
                         src={img ? img.image : ''}
                         zoomType="hover"
