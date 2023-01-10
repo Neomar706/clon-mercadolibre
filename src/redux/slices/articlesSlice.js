@@ -2,13 +2,16 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 
+
+/**
+ * ****************** Get Articles ****************** 
+ */
 const initialState = {
     loading: false,
     success: false,
     message: '',
     results: []
 }
-
 
 export const getArticles = createAsyncThunk('article/getArticles', async (qtyCategories, thunkAPI) => {
     const { fulfillWithValue, rejectWithValue } = thunkAPI

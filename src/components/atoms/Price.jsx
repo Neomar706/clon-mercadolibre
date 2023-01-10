@@ -3,7 +3,7 @@
 
 export const Price = function({ USD }){
 
-    const price = USD.toString().split('.')
+    const price = USD.toLocaleString('en-US', { minimumFractionDigits: 2,maximumFractionDigits: 2 }).toString().split('.')
 
     return (
         <span className={`text-2xl text-gray-600 flex`}>

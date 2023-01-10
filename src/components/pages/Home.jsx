@@ -77,8 +77,9 @@ export const Home = function({  }){
                                             title={article.title}
                                             image={article.images[0].url} 
                                             isShipmentFree={article.shipment_free} 
+                                            price={article.price} 
                                             isFavorite={false} 
-                                            onFavorite={isFav => console.log(isFav)} price={35} 
+                                            onFavorite={isFav => console.log(isFav)} 
                                         />
                                     ))
                                 }

@@ -72,7 +72,7 @@ export const Card4 = function({ isNew, sold, isFavorite, onFavorite, title, pric
                 <span className='mr-2'>
                     Cantidad: 
                 </span>
-                <Input2 className='w-12' type='number' value={qty} onChange={handleChange} />
+                <Input2 className='w-12 text-sm' type='number' value={qty} onChange={handleChange} />
                 <span className='text-sm text-gray-500 font-proxima-nova ml-2'>
                     ({inStock} Disponibles)
                 </span>
