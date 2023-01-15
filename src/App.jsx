@@ -13,10 +13,14 @@ import { Publish } from './components/pages/Publish'
 import { History } from './components/pages/History'
 import { ForgotPassword } from './components/pages/ForgotPassword'
 import { ResetPassword } from './components/pages/ResetPassword'
+import { MyDetails } from './components/pages/MyDetails'
+import { Security } from './components/pages/Security'
+import { Address } from './components/pages/Address'
 
 import { ProtectedRoute } from './components/ProtectedRoute'
 
 import { me, userSelector } from './redux/slices/userSlice'
+import { Profile } from './components/pages/Profile'
 
 export const App = function(){
 	const dispatch = useDispatch()
@@ -28,7 +32,7 @@ export const App = function(){
 
 	return (
 		<BrowserRouter>
-			<div className='w-full bg-gray-200 *pb-20 min-h-screen'>
+			<div className='w-full bg-gray-200 min-h-screen'>
 				<Navbar />
 				<Routes>
 					<Route path='/' element={<Home />} />
@@ -42,6 +46,10 @@ export const App = function(){
 						<Route path='/account/puchases' element={<Puchases />} />
 						<Route path='/account/history' element={<History />} />
 						<Route path='/account/publish' element={<Publish />} />
+						<Route path='/account/profile' element={<Profile />} />
+						<Route path='/account/profile/my-details' element={<MyDetails />} />
+						<Route path='/account/profile/security' element={<Security />} />
+						<Route path='/account/profile/address' element={<Address />} />
 					</Route>
 				</Routes>
 			</div>

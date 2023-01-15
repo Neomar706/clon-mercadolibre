@@ -41,11 +41,11 @@ export const DropdownList2 = forwardRef(({  }, ref) => {
                         </a>
                     </div>
                     <div className='py-2'>
-                        <a href="#" className='w-full h-8 flex items-center hover:bg-gray-100'>
+                        <Link to="/account/profile" className='w-full h-8 flex items-center hover:bg-gray-100'>
                             <p className='px-5 text-sm font-proxima-nova'>
                                 Mi perfil
                             </p>
-                        </a>
+                        </Link>
                     </div>
                     <div className='py-2'>
                         <Link to="/account/publish" className='w-full h-8 flex items-center hover:bg-gray-100'>

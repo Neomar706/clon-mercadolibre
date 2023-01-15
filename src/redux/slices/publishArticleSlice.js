@@ -27,8 +27,6 @@ export const publishArticle = createAsyncThunk('article/publishArticle', async (
         images: data.images
     }
 
-    console.log({body})
-
     return axios
         .post(`${process.env.BACKEND_HOST}/api/v1/article/new`, body, { withCredentials: true })
         .then(res => fulfillWithValue(res.data))
