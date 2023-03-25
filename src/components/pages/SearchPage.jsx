@@ -1,177 +1,108 @@
-
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { BsChevronDown } from 'react-icons/bs'
 
 import { Card3 } from '../organisms/Card3'
-
 import { ShipmentCard } from '../molecules/ShipmentCard'
 import { List } from '../atoms/List'
-import { MinMax } from '../molecules/MinMax'
-
-import compuerta from '../../assets/compuerta.webp'
-import compuertaDiagrama from '../../assets/compuerta-diagrama.jpg'
-
+import { Range } from '../molecules/Range'
 import { useQuery } from '../../hooks/useQuery'
+import { capitalize } from '../../utils/capitalize'
+
+import { filterArticles, filterArticlesSelector } from '../../redux/slices/filterArticles'
 
 export const SearchPage = function({  }){
+    const navigate = useNavigate()
     const query = useQuery()
-    console.log(query)
-    
-    const capitalize = function(text){
-        const txt = decodeURIComponent(text)
-        return txt[0].toUpperCase() + txt.slice(1)
+    const location = useLocation()
+
+    const dispatch = useDispatch()
+    const { loading, success, result } = useSelector(filterArticlesSelector)
+
+
+    const handleRange = function(range){
+        const url = location.search
+        const output = new URLSearchParams(url)
+        const entriesMap = new Map(output.entries())
+
+        let addingRange = [...entriesMap.entries()].filter(([key, val]) => !key.includes('price'))
+        if(range.min && range.min !== 0) addingRange = [...addingRange, ['price[gte]', range.min]]
+        if(range.max && range.max !== 0) addingRange = [...addingRange, ['price[lte]', range.max]]
+        
+        const newUrl = new URLSearchParams(addingRange)
+        navigate('?' + newUrl.toString())
     }
 
-    const images = [
-        {
-            id: 1,
-            img: compuerta
-        },
-        {
-            id: 2,
-            img: compuertaDiagrama
-        }
-    ]
 
-    const ubicaciones = [
-        {
-            id: 1,
-            name: 'Lara',
-            quantity: 5
-        },
-        {
-            id: 2,
-            name: 'Distrito Capital',
-            quantity: 2
-        },
-        {
-            id: 3,
-            name: 'Carabobo',
-            quantity: 2
-        },
-        {
-            id: 4,
-            name: 'Bolívar',
-            quantity: 1
-        },
-        {
-            id: 5,
-            name: 'Monagas',
-            quantity: 1
-        },
-        {
-            id: 6,
-            name: 'Zulia',
-            quantity: 1
-        },
-    ]
-
-    const categorias = [
-        {
-            id: 1,
-            name: 'Componentes Electrónicos',
-            quantity: 8
-        },
-        {
-            id: 2,
-            name: 'Accesorios para Audio y Video',
-            quantity: 3
-        },
-        {
-            id: 3,
-            name: 'Otros',
-            quantity: 1
-        },
-    ]
-
-    const conditions = [
-        {
-            id: 1,
-            name: 'Nuevo',
-            quantity: 11
-        },
-        {
-            id: 2,
-            name: 'Usado',
-            quantity: 1
-        },
-    ]
-
-    const costoDeEnvio = [
-        {
-            id: 1,
-            name: 'Gratis',
-            quantity: 5
-        }
-    ]
-
-    const precios = [
-        {
-            id: 1,
-            name: 'Hasta U$S 2',
-            quantity: 3
-        },
-        {
-            id: 2,
-            name: 'U$S 2 a U$S 2',
-            quantity: 2
-        },
-        {
-            id: 3,
-            name: 'Más de U$S 2',
-            quantity: 7
-        },
-    ]
-
+    useEffect(() => {
+        dispatch(filterArticles(query))
+    }, [location])
 
     return (
         <div className='w-9/12 mx-auto'>
             <div className="flex mt-8 mb-5">
-                <div className='text-sm text-gray-600 font-quicksand font-medium'>{ query?.keyword && 'Electrónica, Audio y Video' }</div>
+                <div className='text-sm text-gray-600 font-quicksand font-medium'>
+                    {success && Object.keys(result.counters.categoriesCount).slice(0, 3).map(cat => cat).join(', ')}
+                    {success && Object.keys(result.counters.categoriesCount).length > 3 ? ' ...' : null}
+                </div>
                 <div className='ml-auto text-sm text-gray-900 font-roboto font-medium flex'>
                     Ordenar por
-                    <span className='hover:text-blue-500 cursor-pointer flex ml-2'>Más relevantes <BsChevronDown className='mt-[2px] ml-1' size={16}  /></span>
+                    <span className='hover:text-blue-500 cursor-pointer flex ml-2'>
+                        Más relevantes
+                        <BsChevronDown className='mt-[2px] ml-1' size={16}  />
+                    </span>
                 </div>
             </div>
             <div className='flex'>
                 <div className='w-1/4 pr-10'>
                     <div className='text-2xl text-gray-800 font-semibold flex flex-col'>
-                        <p>{query?.keyword ? capitalize(query?.keyword) : capitalize(query?.category_name)}</p>
-                        <span className='text-sm text-gray-600'>53 resultados</span>
+                        <p>
+                            {
+                                query?.keyword 
+                                    ? capitalize(query?.keyword)
+                                    : capitalize(query?.category)
+                            }
+                        </p>
+                        {success && (
+                            <span className='text-sm text-gray-600'>{result.counters.articlesCount} resultados</span>
+                        )}
 
                         <div className='mt-8'>
                             <ShipmentCard />
                         </div>
 
-                        <div className="mt-8">
-                            <List title='Ubicación' list={ubicaciones} />
-                        </div>
-
-                        <div className="mt-8">
-                            <List title='Categorías' list={categorias} />
-                        </div>
-
-                        <div className="mt-8">
-                            <List title='Condición' list={conditions} />
-                        </div>
-
-                        <div className="mt-8">
-                            <List title='Costo de envío' list={costoDeEnvio} />
-                        </div>
-
-                        <div className="mt-8">
-                            <List title='Precio' list={precios} />
-                            <MinMax />
-                        </div>
-
+                        {success && (
+                            <>
+                                <div className="mt-8">
+                                    <List type='state' title='Ubicación' data={result.counters.locationsCount} />
+                                </div>
+                                <div className="mt-8">
+                                    <List type='category' title='Categorías' data={result.counters.categoriesCount} />
+                                </div>
+                                <div className="mt-8">
+                                    <List type='news' title='Condición' data={result.counters.conditionCount} />
+                                </div>
+                                <div className="mt-8">
+                                    <List type='shipmentFree' title='Costo de envío' data={result.counters.shipmentCostCount} />
+                                </div> 
+                                <Range onRange={handleRange} />
+                            </>
+                        )}
                     </div>
                 </div>
                 <div className='w-3/4 h-104 grid grid-cols-3 gap-4 grid-rows-auto'>
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
-                    <Card3 images={images} price={2.40} title='74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' linkTo='/article?id=3&article_name=74ls86 Compuerta Logica Or Exclusiva Ttl Sn74ls86n' isFavorite={false} onFavorite={isFav => console.log(isFav)} />
+                    {success && result.articles?.map(article => (
+                        <Card3 
+                            key={article.id}
+                            images={article.pictures} 
+                            price={article.price} 
+                            title={article.title}
+                            linkTo={`/article?id=${article.id}`}
+                            isFavorite={article.isFavorite} 
+                            onFavorite={isFav => console.log(isFav)} 
+                        />
+                    ))}
                 </div>
             </div>
         </div>

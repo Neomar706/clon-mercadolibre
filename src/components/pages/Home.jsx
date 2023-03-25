@@ -22,11 +22,14 @@ import herramientas from '../../assets/herramientas.webp'
 import hogarYMuebles from '../../assets/hogar-y-muebles.webp'
 import oficina from '../../assets/equipamiento-y-oficina.webp'
 import imgMultimetro from '../../assets/img-multimetro.webp'
+import { userSelector } from '../../redux/slices/userSlice'
+import { toggleFavoriteRequest } from '../../utils/toggleFavoriteRequest'
 
 
 export const Home = function({  }){
     const dispatch = useDispatch()
     const { results, loading, success } = useSelector(articleSelector)
+    const { isLogged } = useSelector(userSelector)
     
 
     const cards = [
@@ -52,9 +55,12 @@ export const Home = function({  }){
         <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} isShipmentFree={true} isFavorite={false} onFavorite={isFav => console.log(isFav)} price={35} />,
     ]
 
+    // if(isLogged) dispatch(getArticles(2))
+
     useEffect(() => {
-        dispatch(getArticles(5))
-    }, [])
+    //     console.log({isLogged})
+        dispatch(getArticles(4))
+    }, [isLogged])
 
     return (
         <>
@@ -73,13 +79,13 @@ export const Home = function({  }){
                                     result.articles.map((article, i) => (
                                         <Card1 
                                             key={i}
-                                            linkTo={`/article?id=${article.id}&article_name=${article.title}`}
+                                            linkTo={`/article?id=${article.id}`}
                                             title={article.title}
-                                            image={article.images[0].url} 
-                                            isShipmentFree={article.shipment_free} 
+                                            image={article.pictures[0].link} 
+                                            isShipmentFree={article.shipmentFree} 
                                             price={article.price} 
-                                            isFavorite={false} 
-                                            onFavorite={isFav => console.log(isFav)} 
+                                            isFavorite={article.isFavorite}
+                                            onFavorite={isFav => toggleFavoriteRequest(article.id)} 
                                         />
                                     ))
                                 }

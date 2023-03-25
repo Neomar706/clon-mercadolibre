@@ -58,10 +58,10 @@ export const Card3 = function({ price, images, linkTo, title, isFavorite, onFavo
                             allowTouchMove={false}
                         >
                             {
-                                images.map(({ img, id }) => (
+                                images.map(({ id, link }) => (
                                     <SwiperSlide key={id}> 
-                                        <div className="w-auto h-[18rem] overflow-hidden flex items-center justify-center">
-                                            <img className="w-auto h-auto max-h-64" src={img} /> 
+                                        <div className="w-auto h-[20rem] overflow-hidden flex items-center justify-center">
+                                            <img className="w-auto h-full max-h-64 object-cover" src={link} /> 
                                         </div>    
                                     </SwiperSlide>
                                 ))

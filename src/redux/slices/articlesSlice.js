@@ -14,7 +14,9 @@ const initialState = {
 }
 
 export const getArticles = createAsyncThunk('article/getArticles', async (qtyCategories, thunkAPI) => {
-    const { fulfillWithValue, rejectWithValue } = thunkAPI
+    const { fulfillWithValue, rejectWithValue, getState } = thunkAPI
+
+    console.log({getState: getState()})
 
     const distinctOf = []
     const resultsRet = []
@@ -24,7 +26,8 @@ export const getArticles = createAsyncThunk('article/getArticles', async (qtyCat
             const encodeDistinctCategories = distinctOf.length
                 ? encodeURIComponent(JSON.stringify(distinctOf))
                 : encodeURIComponent(JSON.stringify(['']))
-            const url = `${process.env.BACKEND_HOST}/api/v1/articles?distinct_of=${encodeDistinctCategories}`
+            let url = `${process.env.BACKEND_HOST}/api/v1/articles?distinct_of=${encodeDistinctCategories}`
+                url += getState().user.isLogged ? `&userId=${getState().user.result.user.id}` : ''
             const res = await axios.get(url, { withCredentials: true })
             distinctOf.push(res.data.result.category)
             resultsRet.push(res.data.result)
@@ -72,4 +75,4 @@ const articleSlice = createSlice({
 })
 
 export const articleReducer = articleSlice.reducer
-export const articleSelector = (state) => state.article
+export const articleSelector = state => state.article

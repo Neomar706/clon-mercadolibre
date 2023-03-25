@@ -15,7 +15,7 @@ export const Zoom = function({ images }){
                     <InnerImageZoom
                         className='w-full h-[27rem] flex items-center'
                         // src={'https://laurenashpole.github.io/react-inner-image-zoom/images/unsplash-10-large.jpg'}
-                        src={img ? img.image : ''}
+                        src={img ? img.link : ''}
                         zoomType="hover"
                         zoomPreload={true}
                     />

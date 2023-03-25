@@ -1,13 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useQuery } from '../../hooks/useQuery'
 
 
 export const ShipmentSwitch = function({ onSwitch }){
-    const [isSwitched, setIsSwitched] = useState(false)
+    const query = useQuery()
+    const [isSwitched, setIsSwitched] = useState(query?.shipmentFree === 'true')
     
     const handleClick = function(){
         setIsSwitched(!isSwitched)
         onSwitch(!isSwitched)
     }
+
+    useEffect(() => {
+        setIsSwitched(query?.shipmentFree === 'true')
+    }, [query])
 
     return (
         <button 

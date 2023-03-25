@@ -21,6 +21,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 
 import { me, userSelector } from './redux/slices/userSlice'
 import { Profile } from './components/pages/Profile'
+// import { getArticles } from './redux/slices/articlesSlice'
 
 export const App = function(){
 	const dispatch = useDispatch()
@@ -28,6 +29,7 @@ export const App = function(){
 
 	useEffect(() => {
 		dispatch(me())
+		// dispatch(getArticles(2))
 	}, [])
 
 	return (

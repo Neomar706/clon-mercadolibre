@@ -24,7 +24,8 @@ export const DropdownList1 = forwardRef(({  }, ref) => {
                         results.map((item) => (
                             <li key={item.id} className='h-9 hover:bg-blue-500'>
                                 <Link 
-                                    to={`/search?category_id=${item.id}&category_name=${item.category}`} 
+                                    // to={`/search?category_id=${item.id}&category_name=${item.category}`} 
+                                    to={`/search?category=${item.category}`} 
                                     className='px-6 text-md font-roboto text-white w-full h-full flex items-center'
                                 >
                                     <p className='flex-none'>

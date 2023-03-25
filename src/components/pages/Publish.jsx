@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useNavigate }  from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import swal from 'sweetalert'
@@ -12,6 +13,7 @@ import { Added } from '../atoms/Added'
 
 import { categorySelector } from '../../redux/slices/categorySlice'
 import { publishArticleSelector, publishArticle } from '../../redux/slices/publishArticleSlice'
+import { userSelector } from '../../redux/slices/userSlice'
 
 
 const IMG_QTY = 8
@@ -28,15 +30,17 @@ export const Publish = function({  }){
     const [categories, setCategories] = useState([])
     const [images, setImages] = useState([])
     
+    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { loading: loadingCat, success: successCat, results } = useSelector(categorySelector)
-    const { loading: loadingArt, success: successArt, message } = useSelector(publishArticleSelector)
+    const { loading: loading, success: success, results } = useSelector(categorySelector)
+    const { loading: _loading, success: _success, message } = useSelector(publishArticleSelector)
+    const { result: { user } } = useSelector(userSelector)
+
 
     const toggleCategory = function(id){
         if(!categories.includes(id)) return setCategories(prev => [...prev, id])
         setCategories(categories.filter(category => category !== id))
     }
-
 
     const handleChangeImages = function(e){
         for(let i = 0; i < e.target.files.length; i++) 
@@ -66,15 +70,20 @@ export const Publish = function({  }){
         }
     }
 
-
     const handleRemoveImage = function(img){
         setImages(images.filter(image => image !== img))
     }
 
 
     const handlePublish = function(){
+        if(!user.addresses.length){
+            toast.error('No puedes publicar sin haber registrado un domicilio.')
+            navigate('/account/profile/address')
+            return
+        }
+
         const verifyFields = []
-        
+
         if(!title) verifyFields.push('Título')
         if(!brand) verifyFields.push('Marca')
         if(!model) verifyFields.push('Modelo')
@@ -107,11 +116,15 @@ export const Publish = function({  }){
         dispatch(publishArticle(data))
     }
 
-    if(loadingArt) {
-        swal(({
+    if(_loading) {
+        swal({
             title: 'Cargando...'
-        }))
+        })
     }
+
+    useEffect(() => {
+        if(_success) navigate('/')
+    }, [_success])
 
     return (
         <div className='py-10'>
@@ -247,9 +260,9 @@ export const Publish = function({  }){
                     </h2>
                     <div className='grid grid-cols-4 gap-4 w-full'>
                         {
-                            loadingCat
+                            loading
                                 ? <h2>Cargando...</h2>
-                                : successCat && results.map(result => (
+                                : success && results.map(result => (
                                     <Button 
                                         key={result.id}
                                         text={result.category}

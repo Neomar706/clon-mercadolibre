@@ -6,6 +6,7 @@ import { TbCar } from 'react-icons/tb'
 import { Price2 } from '../atoms/Price2'
 import { Input2 } from '../atoms/Input2'
 import { Button } from '../atoms/Button'
+import clsx from 'clsx'
 
 
 export const Card4 = function({ isNew, sold, isFavorite, onFavorite, title, price, isShipmentFree, location, onQty, inStock, onBuy }){
@@ -48,25 +49,18 @@ export const Card4 = function({ isNew, sold, isFavorite, onFavorite, title, pric
                     Bs. 38.83
                 </span>
             </div>
-            {
-                isShipmentFree ? (
-                    <div className='flex items-center mt-5 text-green-500'>
-                        <TbCar size={25} />
-                        <span className='ml-2 font-medium font-proxima-nova'>
-                            Envío gratis a todo el pais
+            <div className={clsx('flex items-center mt-5', isShipmentFree ? 'text-green-500' : 'text-gray-600')}>
+                <div className="flex">
+                    {isShipmentFree ? <TbCar size={25} /> : <BsChatRightDots size={19} className='mt-1' />}
+                    <div className='ml-3'>
+                        <span className='font-medium font-proxima-nova'>
+                            {isShipmentFree ? 'Envío gratis a todo el pais' : 'Entrega a acordar con el vendedor'}
                         </span>
+                        <div className='text-sm text-gray-500 font-proxima-nova pt-1'>
+                            {location}
+                        </div>
                     </div>
-                ) : (
-                    <div className='flex items-center mt-5 text-gray-600'>
-                        <BsChatRightDots size={20} />
-                        <span className='ml-2 font-medium font-proxima-nova'>
-                            Entrega a acordar con el vendedor
-                        </span>
-                    </div>
-                )
-            }
-            <div className='text-sm text-gray-500 font-proxima-nova pt-1 pl-8'>
-                {location}
+                </div>
             </div>
             <div className='mt-5 flex flex-row items-center'>
                 <span className='mr-2'>

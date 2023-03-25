@@ -12,8 +12,8 @@ export const ImagesCol = function({ images, currentImg }){
             refs.current.push(elem)
     }
     
-    const hoverHandle = function({id, image}, i){
-        setImg({ id, image })
+    const hoverHandle = function({id, link}, i){
+        setImg({ id, link })
         currentImg(img)
         refs.current[i].classList.add('border-blue-500')
         images.forEach((_, j) => {
@@ -28,14 +28,14 @@ export const ImagesCol = function({ images, currentImg }){
     return (
         <div className='flex flex-col'>
             {
-                images.map(({ id, image }, i) => (
+                images.map(({ id, link }, i) => (
                     <div 
                         key={id}
                         ref={addRef}
-                        onMouseOver={() => hoverHandle({ id, image }, i)}
-                        className='hover:border-blue-500 *border-gray-300 w-14 h-14 border-2 rounded-md overflow-hidden mb-2 cursor-pointer'
+                        onMouseOver={() => hoverHandle({ id, link }, i)}
+                        className='hover:border-blue-500 w-14 h-14 border-2 rounded-md overflow-hidden mb-2 cursor-pointer'
                     >
-                        <img className='w-full h-full' src={image} />
+                        <img className='w-full h-full' src={link} />
                     </div>
                 ))
             }
