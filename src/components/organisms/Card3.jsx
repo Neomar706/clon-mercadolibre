@@ -12,7 +12,7 @@ import { Price } from "../atoms/Price"
 import { Shipment } from "../atoms/Shipment"
 import { ChevronButton2 } from '../atoms/ChevronButton2'
 
-export const Card3 = function({ price, images, linkTo, title, isFavorite, onFavorite }){
+export const Card3 = function({ price, images, linkTo, title, isFavorite, isFree, onFavorite }){
     const [favorite, setFavorite] = useState(isFavorite)
 
     const [prevEl, navPrevRef] = useSwiper()
@@ -72,7 +72,7 @@ export const Card3 = function({ price, images, linkTo, title, isFavorite, onFavo
                         <div className='w-full h-full p-3'>
                             <CardTitle title={title} />
                             <Price USD={price} />
-                            <Shipment type='gratis' />
+                            <Shipment free={isFree} />
                         </div>
                     </div>
                 </article>

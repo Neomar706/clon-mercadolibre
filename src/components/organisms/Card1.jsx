@@ -39,7 +39,7 @@ export const Card1 = function({ title, image, className, linkTo, price, ref, isS
                         <img src={image} alt="img" className='w-auto h-60 object-cover' />
                     </div>
                     <div className='p-3 flex flex-col'>
-                        <Shipment type={isShipmentFree ? 'gratis' : ''} />
+                        <Shipment free={isShipmentFree} />
                         <Price USD={price} />
                         <CardTitle title={title} />
                     </div>

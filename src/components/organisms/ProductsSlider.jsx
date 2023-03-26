@@ -42,7 +42,7 @@ export const ProductsSlider = function({ title, itemsPerView, withTitle = true, 
                     onSlideChange={verifyPosition}
                     modules={[Navigation]}
                     slidesPerGroup={5}
-                    allowTouchMove={false}
+                    // allowTouchMove={false}
                     navigation={{
                         prevEl: prevElement,
                         nextEl: nextElement,

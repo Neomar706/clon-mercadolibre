@@ -100,6 +100,7 @@ export const SearchPage = function({  }){
                             title={article.title}
                             linkTo={`/article?id=${article.id}`}
                             isFavorite={article.isFavorite} 
+                            isFree={article.shipmentFree}
                             onFavorite={isFav => console.log(isFav)} 
                         />
                     ))}

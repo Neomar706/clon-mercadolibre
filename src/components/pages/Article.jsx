@@ -52,22 +52,23 @@ export const Article = function({  }){
 		dispatch(getArticleDetails(query.id))
 	}, [location])
 
-	useEffect(() => {
-		dispatch(getArticleDetails(query.id))
-	}, [isLogged])
+	// useEffect(() => {
+	// 	dispatch(getArticleDetails(query.id))
+	// }, [isLogged])
 
 	useEffect(() => {
-		dispatch(getArticlesByUserId({
-			userId: result.userId,
-			distinctId: result.id,
-			limit: 9 // Opcional. Por defecto es 12
-		}))
-		dispatch(getQuestions(result.id))
-		dispatch(getMyQuestions(result.id))
+		if(result.userId && result.id)
+			dispatch(getArticlesByUserId({
+				userId: result.userId,
+				distinctId: result.id,
+				limit: 9 // Opcional. Por defecto es 12
+			}))
+		if(result.id) dispatch(getQuestions(result.id))
+		if(result.id) dispatch(getMyQuestions(result.id))
 	}, [result])
 
 	useEffect(() => {
-		dispatch(getMyQuestions(result.id))
+		if(result.id) dispatch(getMyQuestions(result.id))
 	}, [_makeQuestion.success])
 
 	const cards = [
@@ -181,8 +182,9 @@ export const Article = function({  }){
 						</h4>
 
 						{/* __loading, __success, _results <- pertenecen al slice getQuestions */}
-						{!__loading && __success && _results.map(q => (
+						{!__loading && __success && _results.map((q, i) => (
 							<QuestionAnswer
+								key={i}
 								question={q.question}
 								answer={q.answer}
 								answerDate={new Date(q.answerDate).toLocaleDateString()}

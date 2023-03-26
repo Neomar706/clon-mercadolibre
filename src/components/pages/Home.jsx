@@ -76,9 +76,9 @@ export const Home = function({  }){
                                 itemsPerView={result.articles.length <= 5 ? result.articles.length : 5} 
                                 hasNavigation={result.articles.length > 5}
                                 cards={
-                                    result.articles.map((article, i) => (
+                                    result.articles.map((article, j) => (
                                         <Card1 
-                                            key={i}
+                                            key={j}
                                             linkTo={`/article?id=${article.id}`}
                                             title={article.title}
                                             image={article.pictures[0].link} 

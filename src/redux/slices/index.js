@@ -14,6 +14,7 @@ import { articlesByUserIdReducer } from './articlesByUserId'
 import { getQuestionsReducer } from './questionSlice'
 import { makeQuestionReducer } from './makeQuestionSlice'
 import { getMyQuestionsReducer } from './myQuestionsSlice'
+import { getFavoritesReducer } from './getFavorites'
 
 export const rootReducer = combineReducers({
     user: userReduder,
@@ -29,5 +30,6 @@ export const rootReducer = combineReducers({
     articlesByUserId: articlesByUserIdReducer,
     getQuestions: getQuestionsReducer,
     makeQuestion: makeQuestionReducer,
-    myQuestions: getMyQuestionsReducer
+    myQuestions: getMyQuestionsReducer,
+    getFavorites: getFavoritesReducer
 })
