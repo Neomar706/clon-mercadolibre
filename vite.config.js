@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env': {
-      NODE_ENV: 'development',
+      NODE_ENV: 'production',
       HOST: 'https://clon-mercadolibre-production.up.railway.app/',
       BACKEND_HOST: 'https://clon-mercadolibre-api-production.up.railway.app'
     }
