@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "http-server ./dist --cors",
+    "start": "http-server ./dist --cors --port 80",
     "preview": "vite preview"
   },
   "dependencies": {
