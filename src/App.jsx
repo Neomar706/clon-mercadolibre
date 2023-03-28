@@ -16,12 +16,12 @@ import { ResetPassword } from './components/pages/ResetPassword'
 import { MyDetails } from './components/pages/MyDetails'
 import { Security } from './components/pages/Security'
 import { Address } from './components/pages/Address'
+import { Favorites } from './components/pages/Favorites'
 
 import { ProtectedRoute } from './components/ProtectedRoute'
 
 import { me, userSelector } from './redux/slices/userSlice'
 import { Profile } from './components/pages/Profile'
-// import { getArticles } from './redux/slices/articlesSlice'
 
 export const App = function(){
 	const dispatch = useDispatch()
@@ -29,7 +29,6 @@ export const App = function(){
 
 	useEffect(() => {
 		dispatch(me())
-		// dispatch(getArticles(2))
 	}, [])
 
 	return (
@@ -46,12 +45,13 @@ export const App = function(){
 					<Route path='/password/reset' element={<ResetPassword />} />
 					<Route element={<ProtectedRoute isLogged={isLogged} />}>
 						<Route path='/account/puchases' element={<Puchases />} />
-						<Route path='/account/history' element={<History />} />
+						<Route path='/account/history/:page' element={<History />} />
 						<Route path='/account/publish' element={<Publish />} />
 						<Route path='/account/profile' element={<Profile />} />
 						<Route path='/account/profile/my-details' element={<MyDetails />} />
 						<Route path='/account/profile/security' element={<Security />} />
 						<Route path='/account/profile/address' element={<Address />} />
+						<Route path='/account/favorites/:page' element={<Favorites />} />
 					</Route>
 				</Routes>
 			</div>

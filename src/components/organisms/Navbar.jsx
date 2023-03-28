@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import axios from 'axios'
 
 import { CiUser } from 'react-icons/ci'
 import { BsBell } from 'react-icons/bs'
@@ -25,6 +24,7 @@ import { toggleFavoriteRequest } from '../../utils/toggleFavoriteRequest'
 
 export const Navbar = function(){
     const dispatch = useDispatch()
+    const location = useLocation()
 
     const { result, isLogged } = useSelector(userSelector)
     const { loading, success, results, message } = useSelector(getFavoritesSelector)
@@ -32,7 +32,6 @@ export const Navbar = function(){
     const [ over, leave, dropRef ] = useDropdown()
     const [ _over, _leave, _dropRef ] = useDropdown()
     const [ favOver, favLeave, favDropRef ] = useDropdown()
-
 
     return (
         <div className='w-full bg-[#fff159]'>
@@ -58,7 +57,7 @@ export const Navbar = function(){
                             { <DropdownList1 ref={_dropRef} /> }
                         </li>
                         <li className='ml-28 text-sm text-gray-600 hover:text-gray-800'>
-                            <Link to={isLogged ? '/account/history' : '/login?redirect=history'}>Historial</Link>
+                            <Link to={isLogged ? '/account/history/1' : '/login?redirect=history'}>Historial</Link>
                         </li>
                         <li className='ml-9 text-sm text-gray-600 hover:text-gray-800'> <a href="#">Tiendas oficiales</a> </li>
                         <li className='ml-9 text-sm text-gray-600 hover:text-gray-800'> <a href="#">Ofertas de la semana</a> </li>
@@ -68,10 +67,10 @@ export const Navbar = function(){
                         <li className='ml-9 text-sm text-gray-600 hover:text-gray-800'> <a href="#">Ayuda</a> </li>
                     </ul>
                     <ul className='flex items-center font-proxima-nova'>
-                        {
-                            isLogged ? (
+                        {[
+                            isLogged && (
                                 <>
-                                    <li className='ml-4 text-gray-800 hover:text-gray-900 relative *group'>
+                                    <li key={1} className='ml-4 text-gray-800 hover:text-gray-900 relative *group'>
                                         <span 
                                             className='flex items-center text-sm cursor-pointer' 
                                             onMouseLeave={leave}
@@ -91,7 +90,8 @@ export const Navbar = function(){
                                             href="#" className='flex items-center text-sm cursor-pointer'
                                             onMouseOver={e => {
                                                 favOver(e)
-                                                dispatch(getFavorites({ limit: 10, page: 1 }))
+                                                if(!location.pathname.includes('/account/favorites'))
+                                                    dispatch(getFavorites({ limit: 10, page: 1 }))
                                             }}
                                             onMouseLeave={favLeave}
                                         >
@@ -100,12 +100,13 @@ export const Navbar = function(){
                                         </span>
                                         <FavoriteDropdown
                                             ref={favDropRef}
-                                            cards={ 
-                                                loading ? (
-                                                    <div className='flex justify-center items-center h-20 bg-white'>
+                                            cards={[
+                                                loading && (
+                                                    <div key={1} className='flex justify-center items-center h-20 bg-white'>
                                                         <div className='w-6 h-6 border-blue-500 border-t-2 border-r-2 rounded-full animate-spin' />
                                                     </div>
-                                                ) : success && results.length ?
+                                                ),
+                                                !loading && success && results.length && (
                                                     results.map(result => (
                                                         <FavoriteCard
                                                             key={result.id}
@@ -120,22 +121,25 @@ export const Navbar = function(){
                                                             }}
                                                             linkTo={result.link}
                                                         />
-                                                    )) : success && !result.length ? (
-                                                            <div className='px-5 text-sm text-gray-600 h-20 bg-white flex items-center w-full'>
-                                                                No se encontraron resultados
-                                                            </div>
-                                                        )
-                                                        : (
-                                                            <div className='px-5 text-sm text-gray-600 h-20 bg-white flex items-center w-full'>
-                                                                {message}
-                                                            </div>
-                                                        )
-                                            } 
+                                                    ))
+                                                ),
+                                                !loading && success && !results.length && (
+                                                    <div key={2} className='px-5 text-sm text-gray-600 h-20 bg-white flex items-center w-full'>
+                                                        No se encontraron resultados
+                                                    </div>
+                                                ),
+                                                !loading && !success && message && (
+                                                    <div key={3} className='px-5 text-sm text-gray-600 h-20 bg-white flex items-center w-full'>
+                                                        {message}
+                                                    </div>
+                                                )
+                                            ]} 
                                         />
                                     </li>
                                     <li className='ml-4 text-gray-800 hover:text-gray-900'> <a href="#" className='text-sm'><BsBell /></a> </li>
                                 </>
-                            ) : (
+                            ),
+                            !isLogged && (
                                 <>
                                     <li className='ml-4 text-gray-800 hover:text-gray-900'>
                                         <Link to='/register' className='text-sm'>Crea tu cuenta</Link>
@@ -146,7 +150,7 @@ export const Navbar = function(){
                                     </li>
                                 </>
                             )
-                        }
+                        ]}
                     </ul>
                 </nav>
             </div>

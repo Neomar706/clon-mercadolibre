@@ -31,7 +31,7 @@ export const SidebarWrapper = function({ children, activeIndex }){
                 {
                     name: 'Favoritos',
                     active: false,
-                    link: '#'
+                    link: '/account/favorites/1'
                 }
             ]
         },
@@ -105,8 +105,8 @@ export const SidebarWrapper = function({ children, activeIndex }){
     }
 
     return (
-        <section className="flex gap-6 relative"  style={{height: 'calc(100vh - 6.25rem)' }}>
-            <div {...actions} className={`absolute top-0 left-0 *px-4 font-proxima-nova z-20 bg-white h-full shadow-md duration-500 ${ open ? "w-64" : "w-16"}`}>
+        <section className="flex gap-6 relative"  style={{minHeight: 'calc(100vh - 6.25rem)' }}>
+            <div {...actions} className={`sticky h-screen top-0 left-0 *px-4 font-proxima-nova z-20 bg-white shadow-md duration-500 ${ open ? "w-64" : "w-16"}`}>
                 <div className="p-4 flex justify-start mt-8 items-center">
                     <div className='pl-1'>
                         {

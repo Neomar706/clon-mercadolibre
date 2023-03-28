@@ -11,7 +11,7 @@ const initialState = {
 export const getArticlesByUserId = createAsyncThunk('article/articlesByUserId', async (data, thunkAPI) => {
     const { fulfillWithValue, rejectWithValue } = thunkAPI
     const { userId, limit, distinctId } = data
-    let url = `http://localhost:5000/api/v1/articles/by-user?userId=${userId}`
+    let url = `${process.env.BACKEND_HOST}/api/v1/articles/by-user?userId=${userId}`
     
     if(limit) url += `&limit=${limit}`
     if(distinctId) url += `&distinctId=${distinctId}`

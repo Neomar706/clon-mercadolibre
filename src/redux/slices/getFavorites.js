@@ -9,6 +9,7 @@ const initialState = {
     loading: false,
     success: false,
     message: '',
+    count: 0,
     results: []
 }
 
@@ -30,7 +31,8 @@ export const getFavorites = createAsyncThunk('favorite/getFavorites', async (dat
 const getFavoritesPending = function(state, _){
     state.loading = true
     state.success = false
-    state.message = ''   
+    state.message = ''
+    state.count   = 0
     state.results = []
 }
 
@@ -38,13 +40,15 @@ const getFavoritesFulfilled = function(state, { payload }){
     state.loading = false
     state.success = payload?.success
     state.message = ''
-    state.results = payload?.results
+    state.count   = payload?.result?.count
+    state.results = payload?.result?.favorites
 }
 
 const getFavoritesRejected = function(state, { paylaod }){
     state.loading = false
     state.success = paylaod?.success
     state.message = paylaod?.message
+    state.count   = 0
     state.results = []
 }
 

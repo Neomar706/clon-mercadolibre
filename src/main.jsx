@@ -7,7 +7,6 @@ import { store } from './redux/store'
 import './index.css'
 
 
-
 const app = (
     <Provider store={store}>
         <Toastify />

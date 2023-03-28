@@ -11,6 +11,7 @@ import { useQuery } from '../../hooks/useQuery'
 import { capitalize } from '../../utils/capitalize'
 
 import { filterArticles, filterArticlesSelector } from '../../redux/slices/filterArticles'
+import { toggleFavoriteRequest } from '../../utils/toggleFavoriteRequest'
 
 export const SearchPage = function({  }){
     const navigate = useNavigate()
@@ -91,20 +92,36 @@ export const SearchPage = function({  }){
                         )}
                     </div>
                 </div>
-                <div className='w-3/4 h-104 grid grid-cols-3 gap-4 grid-rows-auto'>
-                    {success && result.articles?.map(article => (
-                        <Card3 
-                            key={article.id}
-                            images={article.pictures} 
-                            price={article.price} 
-                            title={article.title}
-                            linkTo={`/article?id=${article.id}`}
-                            isFavorite={article.isFavorite} 
-                            isFree={article.shipmentFree}
-                            onFavorite={isFav => console.log(isFav)} 
-                        />
-                    ))}
-                </div>
+                {[
+                    loading && (
+                        <div key={1} className='w-3/4 h-screen flex'>
+                            <div className='mx-auto my-52 w-14 h-14 border-blue-500 border-t-4 border-r-border-t-4 rounded-full animate-spin' />
+                        </div>
+                    ),
+                    !loading && success && !!result.articles?.length && (
+                        <div key={2} className='w-3/4 h-104 grid grid-cols-3 gap-4 grid-rows-auto'>
+                            {success && result.articles?.map(article => (
+                                <Card3 
+                                    key={article.id}
+                                    images={article.pictures} 
+                                    price={article.price} 
+                                    title={article.title}
+                                    linkTo={`/article?id=${article.id}`}
+                                    isFavorite={article.isFavorite} 
+                                    isFree={article.shipmentFree}
+                                    onFavorite={isFav => toggleFavoriteRequest(article.id)} 
+                                />
+                            ))}
+                        </div>
+                    ),
+                    !loading && success && !result.articles?.length && (
+                        <div key={3} className='w-3/4 h-screen flex'>
+                            <h2 className='mx-auto my-52 text-lg text-gray-600 font-roboto'>
+                                No se encontraron resultados 404
+                            </h2>
+                        </div>
+                    )
+                ]}
             </div>
         </div>
     )

@@ -27,6 +27,7 @@ import { articlesByUserIdSelector, getArticlesByUserId } from '../../redux/slice
 import { getQuestions, getQuestionsSelector } from '../../redux/slices/questionSlice'
 import { makeQuestion, makeQuestionSelector } from '../../redux/slices/makeQuestionSlice'
 import { getMyQuestions, getMyQuestionsSelector } from '../../redux/slices/myQuestionsSlice'
+import { add2HistoryRequest } from '../../utils/add2HistoryRequest'
 
 export const Article = function({  }){ 
 	const query = useQuery()
@@ -63,8 +64,11 @@ export const Article = function({  }){
 				distinctId: result.id,
 				limit: 9 // Opcional. Por defecto es 12
 			}))
-		if(result.id) dispatch(getQuestions(result.id))
-		if(result.id) dispatch(getMyQuestions(result.id))
+		if(result.id) {
+			dispatch(getQuestions(result.id))
+			dispatch(getMyQuestions(result.id))
+			add2HistoryRequest(result.id)
+		}
 	}, [result])
 
 	useEffect(() => {
@@ -190,20 +194,12 @@ export const Article = function({  }){
 								answerDate={new Date(q.answerDate).toLocaleDateString()}
 							/>
 						))}
-
-						{/* <QuestionAnswer question='Buenos días no tendrás el integrado 0ictmsa002f' answer='Buenas tardes. No lo tenemos' answerDate='15/12/2022' />
-						<QuestionAnswer question='Buenos días no tendrás el integrado 0ictmsa002f Lg631 9r 57z2 6ea3k' answer='Buenas tardes. No lo tenemos' answerDate='15/12/2022' />
-						<QuestionAnswer question='Buenos días son smd ( montaje superficial) ?? Rekiero 5' answer='Buen dia. No, pcb' answerDate='08/11/2022' />
-						<QuestionAnswer question='Disponible 74LS04 y 74LS08? Cuánto tarda el envío?' answer='Disponibles. Depende de la ciudad destino y la empresa de encomiendas. Cumpliendo con las condiciones de la descripción se envia mañana a la agencia de la empresa de encomiendas.' answerDate='26/10/2022' /> */}
-
 					</div>
 
 				</div>
 				<div className='grid gap-3 absolute top-4 right-4 col-start-9 col-span-12'>
 					<>
 						<Card4
-							// title={decodeURIComponent(query?.article_name)}
-							// location='Mun. Libertador (centro), Distrito Capital'
 							isNew={result.isNew}
 							sold={result.purchases.length}
 							isFavorite={result.isFavorite}

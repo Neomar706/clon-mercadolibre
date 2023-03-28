@@ -18,7 +18,7 @@ export const FavoriteDropdown = forwardRef(({ cards }, ref) => {
                     </div>
                     <div className="py-2 flex px-5 w-full bg-white rounded-b-md">
                         <div className='items-center content-center mx-auto'>
-                            <Link to='#' className='text-sm text-blue-500 hover:text-blue-600'>
+                            <Link to='/account/favorites/1' className='text-sm text-blue-500 hover:text-blue-600'>
                                 Ver todos los favoritos
                             </Link>
                         </div>

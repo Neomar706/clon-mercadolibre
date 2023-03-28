@@ -7,10 +7,13 @@ import { Price2 } from '../atoms/Price2'
 import { Input2 } from '../atoms/Input2'
 import { Button } from '../atoms/Button'
 import clsx from 'clsx'
+import { useSelector } from 'react-redux'
+import { userSelector } from '../../redux/slices/userSlice'
 
 
 export const Card4 = function({ isNew, sold, isFavorite, onFavorite, title, price, isShipmentFree, location, onQty, inStock, onBuy }){
     const [favorite, setFavorite] = useState(isFavorite)
+    const { isLogged } = useSelector(userSelector)
     const [qty, setQty] = useState(1)
 
     const handleClick = function(){
@@ -34,13 +37,15 @@ export const Card4 = function({ isNew, sold, isFavorite, onFavorite, title, pric
             <div className='flex mt-3'>
                 <div className='text-2xl font-proxima-nova font-normal text-gray-700 pr-3'>{title}</div>
                 <div className='pt-2'>
-                    <button onClick={() => handleClick()}>
-                        {
-                            favorite
-                                ? <BsHeartFill className='text-blue-500' size={22} />
-                                : <BsHeart className='text-blue-500' size={22} />
-                        }
-                    </button>
+                    {isLogged && (
+                        <button onClick={() => handleClick()}>
+                            {
+                                favorite
+                                    ? <BsHeartFill className='text-blue-500' size={22} />
+                                    : <BsHeart className='text-blue-500' size={22} />
+                            }
+                        </button>
+                    )}
                 </div>
             </div>
             <div className='mt-5'>
