@@ -7,7 +7,7 @@ export default defineConfig({
   define: {
     'process.env': {
       NODE_ENV: 'development',
-      HOST: 'localhost:5173',
+      HOST: 'https://clon-mercadolibre-production.up.railway.app/',
       BACKEND_HOST: 'https://clon-mercadolibre-api-production.up.railway.app'
     }
   }
