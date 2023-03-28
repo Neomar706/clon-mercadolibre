@@ -98,9 +98,13 @@ export const Article = function({  }){
         <Card1 linkTo='#' title='Tester Multímetro Capacímetro Digital 40mf Uni-t Ut136b+' image={imgMultimetro} price={35} />,
     ]
 
-	return loading 
-	? <div>Cargando...</div> 
-	: success && (
+	return loading ? (
+		<div className='-mt-14'>
+			<div className='flex justify-center items-center h-screen'>
+				<div className='mx-auto my-52 w-14 h-14 border-blue-500 border-t-4 border-r-border-t-4 rounded-full animate-spin' />
+			</div>
+		</div>
+	) : success && (
 		<>
 			<div className='w-9/12 mx-auto mt-10 p-4 *flex grid grid-cols-12 rounded-sm bg-white relative'>
 				<div className='grid grid-row-3 col-start-1 col-span-8'>

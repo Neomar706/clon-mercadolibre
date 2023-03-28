@@ -141,7 +141,7 @@ export const Navbar = function(){
                             ),
                             !isLogged && (
                                 <>
-                                    <li className='ml-4 text-gray-800 hover:text-gray-900'>
+                                    <li key={2} className='ml-4 text-gray-800 hover:text-gray-900'>
                                         <Link to='/register' className='text-sm'>Crea tu cuenta</Link>
                                     </li>
                                     <li className='ml-4 text-gray-800 hover:text-gray-900'> <Link to='/login' className='text-sm'>Ingresa</Link> </li>
